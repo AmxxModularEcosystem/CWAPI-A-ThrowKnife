@@ -4,8 +4,6 @@
 #include <xs>
 #include <cwapi>
 
-#define var_bIsStuck var_iuser1
-
 new const ABILITY_NAME[] = "ThrowKnife";
 new const KNIFE_CLASSNAME[] = "ThrowKnife";
 new const KNIFE_MODEL[] = "models/cwapi/a/throw-knife/knife.mdl";
@@ -84,7 +82,6 @@ ThrowKnife(
     set_entvar(EntId, var_sequence, 0);
     set_entvar(EntId, var_framerate, 1.0);
 
-    set_entvar(EntId, var_bIsStuck, false);
     set_entvar(EntId, var_owner, FromEntId);
     set_entvar(EntId, var_dmg, fDamage);
     SetEntSize(EntId, Float:{-2.0, -2.0, -2.0}, Float:{2.0, 2.0, 2.0});
@@ -103,7 +100,6 @@ ThrowKnife(
     SetThink(EntId, "@OnKnifeThink");
 
     if (!FClassnameIs(UserId, "player")) {
-        set_entvar(EntId, var_bIsStuck, true);
         set_entvar(EntId, var_solid, SOLID_NOT);
         set_entvar(EntId, var_movetype, MOVETYPE_NONE);
         set_entvar(EntId, var_nextthink, get_gametime() + KNIFE_STUCKED_TIME);
